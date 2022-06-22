@@ -5,7 +5,7 @@
 # . 
 # . Resolvido por: Marília Pinho & Rodrigo Sequeira
 # . 
-# . 2022-06
+# . 2022-06-22
 # . 
 """
 Usage: 
@@ -29,7 +29,7 @@ Este cliente aceita as seguintes opções:
     $ python3 client.py (get|put) [-p serv_port] server source_file [dest_file] 
     $ python3 client.py [-p serv_port] server
 
-(C) Marília Pinho & Rodrigo Sequeira, Junho2022
+(C) Marília Pinho & Rodrigo Sequeira, 2022-06-22
 """
 
 from docopt import docopt
@@ -47,9 +47,6 @@ argumentos = docopt(__doc__)
 
 if argumentos['SERVER']:
     servidor = argumentos['SERVER']
-else: 
-    print('ERRO: não foi inserido o servidor.')
-    exit(2)
 #:fi
 
 if argumentos['--port']:
@@ -81,26 +78,18 @@ else:
 #:fi
 
 if argumentos['get']:
-    if not sfile:
-        print('ERRO: não foi inserido o ficheiro de origem.')
-        exit(2)
-    #:fi
 
     try:
         tftp.get_file(serv_addr, sfile, dfile)
     except:
         ei = sys.exc_info()
-        print(f"ERRO: {str(ei[1])}")
+        print(f"ERROR: {str(ei[1])}")
     #:yrt
 
 elif argumentos['put']:
-    if not sfile:
-        print('ERRO: não foi inserido o ficheiro de origem.')
-        exit(2)
-    #:fi
 
     if not isfile(sfile):
-        print('ERRO: \'' + sfile + '\' não é válido')
+        print('ERROR: File\'' + sfile + '\' not found.')
         exit(2)
     #:fi
 
@@ -108,7 +97,7 @@ elif argumentos['put']:
         tftp.put_file(serv_addr, sfile, dfile)
     except:
         ei = sys.exc_info()
-        print(f"ERRO: {str(ei[1])}")
+        print(f"ERROR: {str(ei[1])}")
     #:yrt
 
 else:

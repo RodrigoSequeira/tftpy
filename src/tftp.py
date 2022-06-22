@@ -2,7 +2,7 @@
 This module handles all TFTP related data structures and 
 methods.
 
-(C) João Galamba, Marília Pinho & Rodrigo Sequeira 2022
+(C) João Galamba, Marília Pinho & Rodrigo Sequeira, 2022-06-22
 """
 # pylint: disable=redefined-outer-name
 
@@ -262,8 +262,8 @@ def get_dir(serv_addr: INET4Address):
             try:
                 sock.sendto(ack, new_serv_addr)
             except:
-                raise NetworkError(f"Error reaching the server '{s_nome}' ({s_ip})")
-                #raise NetworkError(f"Error reaching the server {serv_addr[0]}")
+                #raise NetworkError(f"Error reaching the server '{s_nome}' ({s_ip})")
+                raise NetworkError(f"Error reaching the server {serv_addr[0]}")
             #:yrt
 
             tot_len += len(data)
